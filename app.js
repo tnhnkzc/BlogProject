@@ -19,7 +19,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //Database connection
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(
+  "mongodb+srv://tnhnkzc:Mnta1173.+@cluster0.6bddj.mongodb.net/blogDB?retryWrites=true&w=majority"
+);
 
 //MongoDB Post Schema
 const postSchema = new mongoose.Schema({
@@ -113,6 +115,6 @@ app.post("/compose", function (req, res) {
   res.redirect("/");
 });
 
-app.listen(3000, function () {
+app.listen(process.env.PORT || 3000, function () {
   console.log("Server started on port 3000");
 });
