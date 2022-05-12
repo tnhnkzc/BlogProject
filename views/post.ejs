@@ -1,0 +1,15 @@
+<%- include('partials/header.ejs');%>
+<div class="container">
+  <form action="/delete" method="post" class="deleteForm">
+    <input
+      type="checkbox"
+      name="deleteItem"
+      value="<%= post._id %>"
+      onChange="this.form.submit()"
+    />
+    <label for="deleteItem">Click on the checkbox to delete the post!</label>
+  </form>
+  <h1><%= post.title %></h1>
+  <p><%= post.body %></p>
+</div>
+<%- include('partials/footer.ejs');%>
