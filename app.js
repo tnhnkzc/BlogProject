@@ -19,9 +19,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
 //Database connection
-mongoose.connect(
-  "mongodb+srv://tnhnkzc:Mnta1173.+@cluster0.6bddj.mongodb.net/blogDB?retryWrites=true&w=majority"
-);
+mongoose.connect(process.env.MONGODB_URI);
 
 //MongoDB Post Schema
 const postSchema = new mongoose.Schema({
