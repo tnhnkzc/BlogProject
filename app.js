@@ -75,7 +75,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: "https://blogtunahan.herokuapp.com//auth/google/profile",
+      callbackURL: "https://blogtunahan.herokuapp.com/auth/google/profile",
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
@@ -93,7 +93,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
-      callbackURL: "https://blogtunahan.herokuapp.com//auth/facebook/profile",
+      callbackURL: "https://blogtunahan.herokuapp.com/auth/facebook/profile",
     },
     function (accessToken, refreshToken, profile, cb) {
       User.findOrCreate(
