@@ -75,7 +75,7 @@ passport.use(
     {
       clientID: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_SECRET,
-      callbackURL: "http://localhost:3000/auth/google/home",
+      callbackURL: "http://localhost:3000/auth/google/profile",
       passReqToCallback: true,
     },
     function (request, accessToken, refreshToken, profile, done) {
@@ -93,7 +93,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_CLIENT_ID,
       clientSecret: process.env.FACEBOOK_SECRET,
-      callbackURL: "http://localhost:3000/auth/facebook/home",
+      callbackURL: "http://localhost:3000/auth/facebook/profile",
     },
     function (accessToken, refreshToken, profile, cb) {
       User.findOrCreate(
@@ -106,7 +106,7 @@ passport.use(
   )
 );
 // GET ROUTES //
-app.get("/home", function (req, res) {
+app.get("/", function (req, res) {
   //Fetch items from DB
   Post.find({}, function (err, foundPosts) {
     if (foundPosts.length === 0) {
@@ -191,9 +191,9 @@ app.get(
   passport.authenticate("google", { scope: ["profile", "email"] })
 );
 app.get(
-  "/auth/google/home",
+  "/auth/google/profile",
   passport.authenticate("google", {
-    successRedirect: "/home",
+    successRedirect: "/profile",
     failureRedirect: "/auth/google/failure",
   })
 );
@@ -203,15 +203,15 @@ app.get(
   passport.authenticate("facebook", { scope: ["email"] })
 );
 app.get(
-  "/auth/facebook/home",
+  "/auth/facebook/profile",
   passport.authenticate("facebook", { failureRedirect: "/register" }),
   function (req, res) {
-    res.redirect("/home");
+    res.redirect("/profile");
   }
 );
 app.get("/logout", function (req, res) {
   req.logout();
-  res.redirect("/home");
+  res.redirect("/");
 });
 app.get("/profile", function (req, res) {
   if (req.isAuthenticated()) {
@@ -248,7 +248,7 @@ app.post("/delete", function (req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.redirect("/home");
+      res.redirect("/profile");
     }
   });
 });
@@ -263,7 +263,7 @@ app.post("/compose", function (req, res) {
     body: postBody,
     author: author,
   });
-  res.redirect("/home");
+  res.redirect("/");
 });
 
 // Register Locally
@@ -277,7 +277,7 @@ app.post("/register", function (req, res) {
         res.redirect("/register");
       } else {
         passport.authenticate("local")(req, res, function () {
-          res.redirect("/home");
+          res.redirect("/");
         });
       }
     }
@@ -292,7 +292,7 @@ app.post(
     failureMessage: true,
   }),
   function (req, res) {
-    res.redirect("/home");
+    res.redirect("/");
   }
 );
 
