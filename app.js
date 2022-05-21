@@ -54,14 +54,6 @@ userSchema.plugin(findOrCreate);
 
 const Post = mongoose.model("Post", postSchema);
 
-const post1 = new Post({
-  title: "Hello!",
-  body: "You can add your post by clicking on top right button called < Publish > ",
-  author: "Tunahan Kuzucu",
-});
-//post1.save();
-const defaultPost = [post1];
-
 const User = new mongoose.model("User", userSchema);
 passport.use(User.createStrategy());
 passport.serializeUser(function (user, done) {
