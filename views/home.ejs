@@ -14,7 +14,7 @@
           <li><% if(typeof user != 'undefined') { %>
   <a href="/profile" style="visibility: visible">PROFILE</a> <% } %></li>
    <li><% if(typeof user != 'undefined') { %>
-  <a href="/compose" style="visibility: visible">PUBLISH</a> <% } %></li> 
+  <a href="/compose" style="visibility: visible">PUBLISH</a>  <% } %></li> 
           </li>
           <li><% if(typeof user == 'undefined') { %>
   <a href="/register" style="visibility: visible">REGISTER</a> <% } %></li>
@@ -22,7 +22,10 @@
       </div>
     </nav>
 <div class="container">
+  
   <h1>Home</h1>
+  <% if(typeof user != 'undefined') { %>
+  <p>Welcome, <%= user.username %></p><% } %>
   <p><%= homeStartingContent %></p>
   
 </div>
