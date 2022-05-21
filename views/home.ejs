@@ -1,11 +1,35 @@
 <%- include('partials/header.ejs');%>
+<nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <p class="navbar-brand">DAILY JOURNAL</p>
+        </div>
+        <ul class="nav navbar-nav navbar-right">
+          <!-- 6 -->
+          <li id="home"><a href="/home">HOME</a></li>
+          <li id="about"><a href="/about">ABOUT US</a></li>
+          <li id="contact"><a href="/contact">CONTACT US</a></li>         
+          <li><% if(typeof user != 'undefined') { %>
+  <a href="/logout" style="visibility: visible">LOGOUT</a> <% } else { %><a href="/login" style="visibility: visible">LOGIN</a> <% } %></li>
+          <li><% if(typeof user != 'undefined') { %>
+  <a href="/profile" style="visibility: visible">PROFILE</a> <% } %></li>
+   <li><% if(typeof user != 'undefined') { %>
+  <a href="/compose" style="visibility: visible">PUBLISH</a> <% } %></li> 
+          </li>
+          <li><% if(typeof user == 'undefined') { %>
+  <a href="/register" style="visibility: visible">REGISTER</a> <% } %></li>
+        </ul>
+      </div>
+    </nav>
 <div class="container">
   <h1>Home</h1>
   <p><%= homeStartingContent %></p>
+  
 </div>
 <div class="container">
   <% posts.forEach(post => { %>
   <h1><%= post.title %></h1>
+  <p>Author</p><p><a href="/profile/<%= post.author %>"><%= post.author %></a></p>
 
   <p>
     <%=post.body.substring(0, 100) %>...

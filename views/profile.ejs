@@ -9,6 +9,8 @@
           <li id="home"><a href="/home">HOME</a></li>
           <li id="about"><a href="/about">ABOUT US</a></li>
           <li id="contact"><a href="/contact">CONTACT US</a></li>
+         
+         
           <li><% if(typeof user != 'undefined') { %>
   <a href="/logout" style="visibility: visible">LOGOUT</a> <% } else { %><a href="/login" style="visibility: visible">LOGIN</a> <% } %></li>
           <li><% if(typeof user != 'undefined') { %>
@@ -23,13 +25,14 @@
       </div>
     </nav>
 <div class="container">
-  <h1>Compose</h1>
-  <form class="form" action="/compose" method="post">
-    <label>Title</label>
-    <input type="text" name="postTitle" />
-    <label>Post</label>
-    <textarea name="postBody" cols="30" rows="10"></textarea>
-    <button type="submit" name="button">Publish</button>
-  </form>
+  <h1>Profile</h1>
+  <p><%= userName %></p>
+</div>
+<div class="container">
+  <% userPosts.forEach(post => { %>
+  <h1><%= post.title %></h1>
+  <p><%=post.body.substring(0, 100) %>...
+    <a href="/posts/<%= post._id %>">Read More</a></p>
+  <% }); %>
 </div>
 <%- include('partials/footer.ejs');%>
